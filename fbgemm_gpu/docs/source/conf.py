@@ -15,12 +15,17 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import os
 import sys
+import subprocess, os
 
 import pytorch_sphinx_theme
 
 sys.path.insert(0, os.path.abspath("../.."))
+# Doxygen
+subprocess.call('doxygen Doxyfile.in', shell=True)
 
 # -- Project information -----------------------------------------------------
+highlight_language = 'c++'
+breathe_default_members = ('members', 'undoc-members')
 
 project = "fbgemm"
 copyright = "2022, FBGEMM team"
@@ -29,6 +34,7 @@ author = "FBGEMM team"
 # The full version, including alpha/beta/rc tags
 release = "0.1.2"
 
+#breathe_projects_source = {"auto": ("../src/", ["auto_function.h", "auto_class.h"])}
 
 # -- General configuration ---------------------------------------------------
 
@@ -45,6 +51,32 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+extensions = [
+    'sphinx.ext.intersphinx',
+    'breathe',
+]
+
+intersphinx_mapping = {
+    'pytorch': ('https://pytorch.org/docs/master', None)
+}
+
+# Setup absolute paths for communicating with breathe / exhale where
+# items are expected / should be trimmed by.
+# This file is {repo_root}/docs/cpp/source/conf.py
+
+breathe_projects = {
+          "fbgemm_gpu": "../build/xml/",
+          "codegen": "../build/xml/codegen/"
+}
+
+breathe_default_project = "fbgemm_gpu"
+
+
+# Tell sphinx what the primary language being documented is.
+primary_domain = 'cpp'
+
+# Tell sphinx what the pygments highlight language should be.
+highlight_language = 'cpp'
 
 # -- Options for HTML output -------------------------------------------------
 
