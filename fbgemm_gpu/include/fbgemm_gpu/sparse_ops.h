@@ -4,7 +4,6 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 #pragma once
 
 #include <ATen/ATen.h>
@@ -38,6 +37,19 @@ at::Tensor segment_sum_csr_cpu(
     const at::Tensor& csr_seg,
     const at::Tensor& values);
 
+///Description of my method <br> 
+///**Example:**
+///```
+///Here comes
+///my code block
+///```
+///@param - my test param #1
+///@param - my test param #2
+///@return - this function returns abc
+///@note - this is my test note
+///@warning - I'm warning you! =)
+///@throw - fbgemm_gpu::my_error if something something
+///@see - you can find more info here.
 std::tuple<at::Tensor, at::Tensor, c10::optional<at::Tensor>>
 permute_2D_sparse_data_cuda(
     const at::Tensor& permute,

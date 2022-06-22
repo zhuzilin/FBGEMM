@@ -25,7 +25,6 @@ subprocess.call('doxygen Doxyfile.in', shell=True)
 
 # -- Project information -----------------------------------------------------
 highlight_language = 'c++'
-breathe_default_members = ('members', 'undoc-members')
 
 project = "fbgemm"
 copyright = "2022, FBGEMM team"
