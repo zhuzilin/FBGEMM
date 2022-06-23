@@ -13,6 +13,7 @@ library documentation.
    :maxdepth: 2
    :caption: fbgemm_gpu
 
+   sparse_ops.rst 
    quantize_ops_gpu.rst
    quantize_ops_cpu.rst
    sparse_ops_gpu.rst
