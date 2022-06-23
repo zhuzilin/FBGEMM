@@ -10,13 +10,13 @@
 
 namespace fbgemm_gpu {
 
-/** @defgroup sparse-data-cuda
-* The following are CUDA operators
-*/
+/// @defgroup sparse-data-cuda Sparse Data CUDA Operators
+/// The following are CUDA operators
+///
 
-/** @defgroup sparse-data-cpu
-* The following are CPU Operators
-*/
+/// @defgroup sparse-data-cpu Sparse Data CPU Operators
+/// The following are CPU Operators
+///
 
 // Return array of size T_in.numel(), representing incomplete exclusive cumsum
 
