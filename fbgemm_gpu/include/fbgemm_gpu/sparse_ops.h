@@ -94,15 +94,17 @@ permute_1D_sparse_data_cuda(
 ///table dimension to batch dimension, for cases where the sparse features
 ///has different batch sizes across ranks.
 ///
-///@param "permute" the table level permute index.
-///@param "input_offsets" the exclusive offsets of table-level length.
-///@param "output_offsets" the exclusive offsets of table-level permuted length.
+///@param permute the table level permute index.
+///@param input_offsets the exclusive offsets of table-level length.
+///@param output_offsets the exclusive offsets of table-level permuted length.
 ///The op expands the permute from table level to batch level by
 ///contiguously mapping each bag of its corresponding tables to the position the
-///batch sits on after feature permute. we will derive offset array of table and
+///batch sits on after feature permute. We will derive offset array of table and
 ///batch to compute the output permute.
 ///@return The output follows the following formula:
-///output_permute[table_offset[permute[table]] + batch] <- bag_offset[batch].
+///```
+///output_permute[table_offset[permute[table]] + batch] <- bag_offset[batch]
+///```
 at::Tensor expand_into_jagged_permute_cuda(
     const at::Tensor& permute,
     const at::Tensor& input_offsets,
@@ -424,8 +426,7 @@ std::vector<at::Tensor> stacked_jagged_1d_to_dense_gpu(
 ///a fine-grained calibrated model by this calibration module. Theoretically,
 ///this calibration layer can fix any uncalibrated model or prediction if we
 ///have sufficient bins and examples.
-///@returnseturns [calibrated_prediction, bin_ids].
-//
+///@return `[calibrated_prediction, bin_ids]`
 ///@param logit is input tensor before applying Sigmoid.
 ///Assumes positive weight calibration is used for calibartion target, and
 ///@param positive_weight is passed as input argument.
@@ -440,10 +441,9 @@ std::vector<at::Tensor> stacked_jagged_1d_to_dense_gpu(
 ///When this is specified, we perform a weighted sum for the statisctical
 ///bin CTR and the calibration_target:
 ///```
-///final_calibrated_prediction = bin_ctr_weight * bin_ctr + (1 -
-///bin_ctr_weight) * calibration_target.
+///final_calibrated_prediction = bin_ctr_weight * bin_ctr + (1 - bin_ctr_weight) * calibration_target
 ///```
-///Default value: `1.0`
+///Default value: 1.0
 std::tuple<at::Tensor, at::Tensor> histogram_binning_calibration_cpu(
     const at::Tensor& logit,
     const at::Tensor& bin_num_examples,
@@ -481,7 +481,7 @@ std::tuple<at::Tensor, at::Tensor> histogram_binning_calibration_cuda(
 ///this calibration layer can fix any uncalibrated model or prediction if we
 ///have sufficient bins and examples.
 ///
-///@returns [calibrated_prediction, bin_ids].
+///@return `[calibrated_prediction, bin_ids]`
 ///@param logit is input tensor before applying Sigmoid.
 ///
 ///Assumes positive weight calibration is used for calibartion target, and
@@ -540,7 +540,7 @@ histogram_binning_calibration_by_feature_cuda(
 ///@ingroup sparse-data-cpu
 ///Same as above, but accepts generic "bin_boundaries", which is assumed to be
 ///sorted.
-///@returns calibrated_prediction.
+///@return calibrated_prediction.
 std::tuple<at::Tensor, at::Tensor>
 generic_histogram_binning_calibration_by_feature_cpu(
     const at::Tensor& logit,
