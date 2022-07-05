@@ -13,7 +13,8 @@ endif()
 option(USE_CUDA "Use CUDA" ON)
 option(USE_ROCM "Use ROCm" OFF)
 
-if((EXISTS "/opt/rocm/") AND NOT (EXISTS "/bin/nvcc"))
+if(((EXISTS "/opt/rocm/") OR (EXISTS $ENV{ROCM_PATH}))
+   AND NOT (EXISTS "/bin/nvcc"))
   message("AMD GPU detected.")
   set(USE_CUDA OFF)
   set(USE_ROCM ON)
@@ -307,7 +308,8 @@ if(NOT FBGEMM_CPU_ONLY)
     src/permute_pooled_embedding_ops_split_cpu.cpp
     src/quantize_ops_gpu.cpp
     src/sparse_ops_gpu.cpp
-    src/split_table_batched_embeddings.cpp)
+    src/split_table_batched_embeddings.cpp
+    src/metric_ops_host.cpp)
 
   if(NVML_LIB_PATH)
     list(APPEND fbgemm_gpu_sources_cpu src/merge_pooled_embeddings_cpu.cpp
@@ -331,7 +333,8 @@ if(NOT FBGEMM_CPU_ONLY)
       src/quantize_ops.cu
       src/sparse_ops.cu
       src/split_embeddings_cache_cuda.cu
-      src/split_embeddings_utils.cu)
+      src/split_embeddings_utils.cu
+      src/metric_ops.cu)
 
   set_source_files_properties(
     ${fbgemm_gpu_sources_gpu} PROPERTIES COMPILE_OPTIONS
