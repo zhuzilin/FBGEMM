@@ -1,5 +1,5 @@
-Sparse Data Operators - Testing
-===============================
+Sparse Data Operators
+=====================
 
 Sparse Data CUDA Operators
 --------------------------

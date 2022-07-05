@@ -341,8 +341,8 @@ OPTIMIZE_OUTPUT_SLICE  = NO
 #
 # Note see also the list of default file extension mappings.
 
-EXTENSION_MAPPING      = cu=C++ \
-                         cuh=C++
+EXTENSION_MAPPING      = .cu=C++ \
+                         .cuh=C++ \
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -912,6 +912,23 @@ INPUT                  = "../include/fbgemm_gpu" \
                          "../codegen/" \
                          "../include/fbgemm_gpu/layout_transform_ops.cuh" \
                          "../include/fbgemm_gpu/sparse_ops.h" \
+                         "../fbgemm_gpu/src/quantize_ops.cu" \
+                         "../src/quantize_ops_cpu.cpp" \
+                         "../src/split_table_batched_embeddings.cpp" \
+                         "../src/jagged_tensor_ops.cu" \
+                         "../src/jagged_tensor_ops_cpu.cpp" \
+                         "../src/cumem_utils.h" \
+                         "../include/fbgemm_gpu/input_combine.h" \
+                         "../src/layout_transform_ops.cu" \
+                         "../src/layout_transform_ops_cpu.cpp" \
+                         "../codegen/embedding_backward_split_host_template.cpp" \
+                         "../codegen/embedding_backward_split_host_cpu_template.cpp" \
+                         "../codegen/embedding_forward_quantized_host.cpp" \
+                         "../codegen/embedding_forward_quantized_host_cpu.cpp" \
+                         "../codegen/embedding_bounds_check_host.cpp" \
+                         "../codegen/embedding_bounds_check_host_cpu.cpp" \
+                         "../codegen/embedding_backward_dense_host.cpp" \
+                         "../src/permute_pooled_embedding_ops_gpu.cpp" \
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -987,7 +1004,7 @@ EXCLUDE_PATTERNS       =
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories use the pattern */test/*
 
-EXCLUDE_SYMBOLS        = "namespace"
+EXCLUDE_SYMBOLS        =
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

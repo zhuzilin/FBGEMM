@@ -9,8 +9,11 @@
 
 #include <ATen/ATen.h>
 
-namespace fbgemm_gpu {
 
+namespace fbgemm_gpu {
+///@defgroup merge-pooled-emb
+
+///@ingroup merge-pooled-emb
 std::vector<at::Tensor> all_to_one_device(
     std::vector<at::Tensor> inputTensors,
     at::Device target_device);
